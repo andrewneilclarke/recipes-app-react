@@ -8,7 +8,7 @@ const App = () => {
   const API_KEY = '5faa9af73c32e51b895c2c3c0676ced4';
   const [recipes, setRecipes] = useState([]) ;
   const [search, setSearch] = useState('');
-  const [query, setQuery] = useState('chicken')
+  const [query, setQuery] = useState('')
 
   useEffect(() => {
       getRecipes();
@@ -32,6 +32,7 @@ const getSearch = (e) => {
   return (
     <div className="App">
         <form onSubmit={getSearch} className="search-form">
+        <h3 className="title">Find Recipes</h3> 
             <input className="search-bar" type="text" onChange={updateSearch}/>
               <button className="search-button" type="submit" value={search}>Search</button>
         </form>
