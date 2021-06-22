@@ -14,17 +14,28 @@
 }
 
 .search-bar {
-  width: 50%;
+  width: 25%;
   border: none;
   padding: 10px;
+  border-radius: 10px;
+  margin: 10px;
 }
 
 .search-button {
   background: rgb(233, 149, 166);
-  border: none;
+  border: 1px solid #3b98cf;
   padding: 10px 20px;
   color: white;
+  border-radius: 10px;
+}
 
+.recipe {
+  max-width: 17%;
+  text-align:center;
+  
+}
+.recipe h3 {
+  background-color: #8fcbd9;
 }
 
 .recipes {
@@ -33,11 +44,13 @@
   flex-wrap: wrap;
 }
 
-img {
+.recipe img {
   margin: 20px;
+  border-radius: 5px;
+  max-width: 170px;
 }
 
 .title {
   margin-top: 25px;
-  margin-right: 40px;
+  margin-right: 20px;
 }

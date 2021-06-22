@@ -4,8 +4,8 @@ import style from './recipe.module.css'
 const Recipe = ( { title, ingredients, image }) => {
 
     return (
-        <div>
-            <h1 className={style.recipe}>{title}</h1>
+        <div className="recipe">
+            <h3 className={style.recipe}>{title}</h3>
             {ingredients.map(ingredient =>                 
             (
                 <li key={uuid()} className={style.image}>{ingredient}</li> 
