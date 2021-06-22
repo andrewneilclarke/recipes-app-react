@@ -30,7 +30,7 @@
 }
 
 .recipe {
-  max-width: 17%;
+  max-width: 23%;
   text-align:center;
   
 }
@@ -47,7 +47,8 @@
 .recipe img {
   margin: 20px;
   border-radius: 5px;
-  max-width: 170px;
+  min-width: 20vw;
+  
 }
 
 .title {
