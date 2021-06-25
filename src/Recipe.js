@@ -1,7 +1,7 @@
 import uuid from "react-uuid";
 import style from './recipe.module.css'
 
-const Recipe = ( { title, ingredients, image }) => {
+const Recipe = ( { title, ingredients, image, link }) => {
 
     return (
         <div className="recipe">
@@ -12,6 +12,7 @@ const Recipe = ( { title, ingredients, image }) => {
             ))}
     
             <img src={image}  alt=""/>
+            <a href={link}>Open Recipe Site</a>
         </div>
     )
 }
