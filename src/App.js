@@ -9,20 +9,19 @@ const App = () => {
   const API_ID = '332736e6';
   const API_KEY = '5faa9af73c32e51b895c2c3c0676ced4';
   const [recipes, setRecipes] = useState([]) ;
-  const [isLoading, setisLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [query, setQuery] = useState('')
 
   useEffect(() => {
+      const getRecipes = async () => {
+      const res = await fetch(`https://api.edamam.com/search?q=${query}&app_id=${API_ID}&app_key=${API_KEY}`);
+      const data = await res.json();
+      setRecipes(data.hits);
+   }
       getRecipes();
-      setisLoading(false);
   }, [query])
 
-  const getRecipes = async () => {
-     const res = await fetch(`https://api.edamam.com/search?q=${query}&app_id=${API_ID}&app_key=${API_KEY}`);
-     const data = await res.json();
-     setRecipes(data.hits);
-  }
+  
   const updateSearch = (e) => {
     setSearch(e.target.value)
   }
