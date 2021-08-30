@@ -3,7 +3,7 @@
 
 .App {
   min-height: 100vh;
-  background: url(./background.jpg) no-repeat center center / cover;
+  background: url(./background.jpg) repeat-y center center / cover;
   position: absolute;
   top: 0;
   left: 0;
