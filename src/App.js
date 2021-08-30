@@ -3,7 +3,7 @@ import uuid from "react-uuid";
 import Recipe from './Recipe'
 import './App.css';
 import Title from './Title';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 
 const App = () => {
