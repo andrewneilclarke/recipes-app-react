@@ -2,12 +2,14 @@ import { useEffect, useState }  from 'react'
 import uuid from "react-uuid";
 import Recipe from './Recipe'
 import './App.css';
+import Title from './Title';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 
 
 const App = () => {
 
   const API_ID = '332736e6';
-  const API_KEY = '5faa9af73c32e51b895c2c3c0676ced4';
+  const API_KEY = process.env.REACT_APP_API_KEY;
   const [recipes, setRecipes] = useState([]) ;
   const [search, setSearch] = useState('');
   const [query, setQuery] = useState('')
@@ -34,21 +36,28 @@ const App = () => {
 
 
   return (
-    <div className="App">
-        <form onSubmit={getSearch} className="search-form">
-        <h3 className="title">Find Recipes by ingredient</h3> 
-            <input className="search-bar" type="text" placeholder="Enter ingredient (e.g. Red Pepper)" onChange={updateSearch}/>
-              <button className="search-button" type="submit" value={search}>Search</button>
-        </form>
-        {query && recipes.length === 0 && 
-        <h2>No recipes found</h2>}
-        <div className="recipes">
-     {recipes.map(recipe => (
-       <Recipe key={uuid()} title={recipe.recipe.label} ingredients={recipe.recipe.ingredientLines} image={recipe.recipe.image} link={recipe.recipe.url}/>
-     ))} 
-        </div>
-     
+    <Router>
+       <div className="App">
+          <div className="shadow">
+            <div className="home-container">
+            <Title />
+            <Route path="/">
+            <form onSubmit={getSearch} className="search-form">
+                  <input className="search-bar" type="text" placeholder="Enter ingredient (e.g. Red Pepper)" onChange={updateSearch}/>
+                    <button className="search-button" type="submit" value={search}>Search</button>
+              </form>
+            </Route>              
+            </div>
+        {/* {query && recipes.length === 0 && 
+        <h2>No recipes found</h2>} */}
+                <div className="recipes">
+                    {recipes.map(recipe => (
+                        <Recipe key={uuid()} title={recipe.recipe.label} ingredients={recipe.recipe.ingredientLines} image={recipe.recipe.image} link={recipe.recipe.url}/>
+                    ))} 
+              </div>
+          </div>
     </div>
+    </Router>
   );
 }
 

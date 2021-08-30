@@ -1,46 +1,72 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap");
 
 .App {
   min-height: 100vh;
-  background-image: linear-gradient(60deg, #64b3f4 0%, #c2e59c 100%);
-  font-family: 'Lato', sans-serif;
-  padding-top: 20px;;
+  background: url(./background.jpg) no-repeat center center / cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  font-family: "Lato", sans-serif;
+  color: white;
+}
+
+.shadow {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.7);
 }
 
 .search-form {
   min-height: 10vh;
+  width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 .search-bar {
-  width: 25%;
+  width: 32%;
+  height: 22px;
+  font-size: 22px;
   border: none;
   padding: 10px;
-  border-radius: 10px;
-  margin: 10px;
+  margin-top: 40px;
+  border-radius: 3px;
+  text-align: center;
+  cursor: text;
+}
+
+.search-bar:focus {
+  outline: none;
+}
+.search-button:focus {
+  outline: none;
+  background-color: rgba(5, 5, 5, 0.4);
 }
 
 .search-button {
-  background: rgb(233, 149, 166);
-  border: 1px solid #3b98cf;
-  padding: 10px 20px;
-  margin-left: 20px;
+  background: rgba(135, 15, 15, 0.8);
+  padding: 14px 20px;
+  margin: 50px;
   color: white;
-  border-radius: 10px;
+  font-size: 16px;
+  border: none;
 }
-
+.search-button:hover {
+  background-color: rgba(5, 5, 5, 0.4);
+}
 .recipe {
   max-width: 23%;
-  text-align:center;
-  
-}
-.recipe h3 {
-  background-color:#0000004f;
-  color: white;
-  padding: 2px;
-
+  text-align: center;
 }
 
 h2 {
@@ -49,24 +75,59 @@ h2 {
 }
 
 .recipes {
+  margin: 0px 50px;
   display: flex;
-  justify-content: space-around;
+  align-items: flex-start;
+  justify-content: space-between;
   flex-wrap: wrap;
+  padding-bottom: 40px;
 }
 
 .recipe img {
-  margin: 20px;
+  margin: 30px;
   border-radius: 5px;
   width: 90%;
-  height: auto;
+  height: 45%;
   max-width: 25vw;
 }
 
+.recipe a {
+  text-decoration: none;
+  color: black;
+  background-color: rgb(135, 15, 15);
+}
+
 .title {
-  display: inline-flex;
-  margin: 30px 40px;  
-  /* margin-right: 125px; */
-  /* position:relative; */
-  /* left: 70px;
-  top: 30px; */
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.main-title {
+  font-family: "Fredericka the Great", cursive;
+  font-size: 80px;
+  font-weight: lighter;
+}
+.main-title a {
+  text-decoration: none;
+  color: white;
+}
+.main-title a:visited {
+  text-decoration: none;
+  color: white;
+}
+.main-title a:hover {
+  color: rgba(255, 255, 255, 0.4);
+}
+.tagline {
+  font-family: "Fredericka the Great", cursive;
+  font-weight: lighter;
+  letter-spacing: 1px;
+}
+.home-container {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  width: 100vw;
 }
