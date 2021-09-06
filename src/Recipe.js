@@ -1,19 +1,13 @@
-import uuid from "react-uuid";
-import style from './recipe.module.css'
+import RecipeInfo from './RecipeInfo'
 
-const Recipe = ( { title, ingredients, image, link }) => {
-
+const Recipe = ( { recipe, recipes, title, openFullRecipe, url, openmodal, setOpenModal }) => {
+   
     return (
-        <div className="recipe">
-            <h3 className={style.recipe}>{title}</h3>
-            {ingredients.map(ingredient =>                 
-            (
-                <li key={uuid()} className={style.image}>{ingredient}</li> 
-            ))}
-    
-            <img src={image}  alt=""/>
-            <a href={link}>Open Recipe Site</a>
-        </div>
+        <>
+        {recipes && <h3 onClick={(e) => openFullRecipe(url)}>{title}</h3> }
+        
+        { openmodal && <RecipeInfo recipe={recipe}/> }
+        </>
     )
 }
 
