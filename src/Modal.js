@@ -1,4 +1,4 @@
-const RecipeInfo = ( { recipe, recipes, openModal, setOpenModal } ) => {
+const Modal = ( { recipe, recipes, openModal, setOpenModal } ) => {
     // const {ingredients, image, link, title} = recipes;
 //    console.log(ingredients, image, link, title)
     return (
@@ -18,4 +18,4 @@ const RecipeInfo = ( { recipe, recipes, openModal, setOpenModal } ) => {
     )
 }
 
-export default RecipeInfo
+export default Modal;
