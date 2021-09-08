@@ -1,18 +1,22 @@
-const Modal = ( { recipe, recipes, openModal, setOpenModal } ) => {
-    // const {ingredients, image, link, title} = recipes;
-//    console.log(ingredients, image, link, title)
+const Modal = ( { closeModal, currentitem } ) => {
     return (
         <>
-                { openModal && (
+                
                     <div className="modal">
-                        <div className="modal-content">Recipe Info... MODAL {}
-                            <button onClick={() => setOpenModal(false)}>CLOSE</button>
+                        <div className="modal-content">
+                            <h1>{currentitem.title}</h1>
+                            <ul>{currentitem.ingredients.map((ingredient)
+                                (
+                                    <li>{ingredient}</li>
+                                )
+                            )}</ul>
+                            <p>{currentitem.url}</p>
+                            <button onClick={closeModal}>CLOSE</button>
                         </div>
-                    
                     </div>
-                )}
+                
 
-            {recipe && <div>{recipe.label}</div> }
+            {/* {recipe && <div>{recipe.label}</div> } */}
             {/* <img className="close" src="./close.svg" alt="close-button" /> */}
         </>
     )

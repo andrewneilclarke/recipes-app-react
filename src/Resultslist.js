@@ -1,25 +1,13 @@
 import uuid from "react-uuid";
 
-const Resultslist = ( { data, testData } ) => {
-    const {res} = data.hits
-    console.log(testData);
+const Resultslist = ( { data, openModal } ) => {
+    
     return (
-        <div>
-            {/* {testData.map((Data) => (
-                <p key={uuid()}>{Data.name}</p>)
-            )}
-
-            {res.map((result) => 
+        <div className="food-results">
+            {data.map((meal) => 
                (
-                <>
-                <h1 key={uuid()}>{result.name}</h1>
-                <div key={uuid()}>
-                    { result.ingredients.map((ing) =>
-                        (<p key={uuid()}>{ing}</p>))}
-                
-                </div>
-                </>
-            ))} */}
+                <h3 key={uuid()} onClick={() => openModal(meal.recipe.label, meal.recipe.ingredientLines, meal.recipe.url)}>{meal.recipe.label}</h3>
+            ))}
         </div>
     )
 }

@@ -28,21 +28,16 @@ const fetchRecipes = async () => {
 
   const { data, status } = useQuery('recipes', fetchRecipes)
   const [openmodal, setOpenModal] = useState(false);
+  const [currentitem, setCurrentItem] = useState({});
   
-  const openFullRecipe = ( url ) => {
-      setOpenModal(true);
+  const openModal = ( title, ingredients, url ) => {
+    setOpenModal(true);
+    setCurrentItem({title, ingredients, url})
+  }
+  const closeModal = () => {
+    setOpenModal(false);
   }
   
-  useEffect(() => {
-      const getRecipes = async () => {
-      const res = await fetch(`https://api.edamam.com/search?q=${query}&app_id=${API_ID}&app_key=${process.env.REACT_APP_API_KEY}`);
-      const data = await res.json();
-      setRecipes(data.hits);
-   }
-      getRecipes();
-      console.log(recipes)
-  }, [query])
-
   const updateSearch = (e) => {
     setSearch(e.target.value)
   }
@@ -58,20 +53,21 @@ const fetchRecipes = async () => {
           <div className="shadow">
             <div className="home-container">
               <Title />
-              <Form search={search} updateSearch={updateSearch} getSearch={getSearch} />
-              {search && recipes.length === 0 && <Notfound /> }
-              {status === 'success' && <Resultslist data={data} testData={testData}/> }
-              {/* { status === 'success' && <Resultslist testData={testData} />  } */}
+              {/* <Form search={search} updateSearch={updateSearch} getSearch={getSearch} /> */}
+              {status === 'loading' && <div> Loading data </div> }
+              {status === 'error' && <div> Error fetching data </div> }
               
+              {status === 'success' && <Resultslist data={data.hits} testData={testData} openModal={openModal} />}
               
+              {status === 'success' && data.length === 0 && <Notfound /> }
               
               {recipes && <div className="recipes">
                     {recipes.map(recipe => (
-                        <Recipe key={uuid()} recipes={recipes} recipe={recipe} title={recipe.recipe.label} url={recipe.recipe.url} openFullRecipe={openFullRecipe} openmodal={openmodal} setOpenModal={setOpenModal} />
+                        <Recipe key={uuid()} recipes={recipes} recipe={recipe} title={recipe.recipe.label} url={recipe.recipe.url} />
                      ))} 
                         </div> 
               } 
-              {openmodal && <Modal openmodal={openmodal} setOpenModal={setOpenModal} /> }
+              { openmodal && <Modal openmodal={openmodal} setOpenModal={setOpenModal} closeModal={closeModal} currentitem={currentitem} /> }
             </div> 
           </div>
         </div>
