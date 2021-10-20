@@ -1,4 +1,4 @@
-import { useEffect, useState }  from 'react'
+import { useEffect, useState } from 'react'
 import { useQuery } from 'react-query'
 import uuid from "react-uuid";
 import Recipe from './Recipe'
@@ -12,66 +12,75 @@ import Resultslist from './Resultslist';
 const App = () => {
   const API_ID = '332736e6';
   // const API_KEY = process.env.REACT_APP_API_KEY;
-  const [recipes, setRecipes] = useState([]) ;
+  const [recipes, setRecipes] = useState([]);
   const [search, setSearch] = useState('');
-  const [query, setQuery] = useState('')
-  // TEST DATA 
-  const testData = [
-    {name: 'egg salad', ingredients: ['eggs', 'mayo', 'mustard'] },
-    {name: 'cheese ommlette', ingredients: ['eggs', 'cheese', 'salt and pepper'] },
-    {name: 'scrambled eggs', ingredients: ['eggs', 'butter', 'milk'] },
-  ]
-const fetchRecipes = async () => {
-  const res = await fetch(`https://api.edamam.com/search?q=chicken&app_id=${API_ID}&app_key=${process.env.REACT_APP_API_KEY}`);
-  return res.json();
-}
+  const [query, setQuery] = useState('');
 
-  const { data, status } = useQuery('recipes', fetchRecipes)
-  const [openmodal, setOpenModal] = useState(false);
+  useEffect(() => {
+    const getRecipes = async () => {
+      const recipesfromAPI = await fetchRecipes();
+      setRecipes(recipesfromAPI.hits)
+      console.log(recipesfromAPI.hits)
+    }
+    getRecipes();
+  }, [query])
+
+  const fetchRecipes = async () => {
+    try {
+      const res = await fetch(`https://api.edamam.com/search?q=${query}&app_id=${API_ID}&app_key=${process.env.REACT_APP_API_KEY}`);
+      const data = await res.json()
+      return data
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  // const { data, status } = useQuery('recipes', fetchRecipes)
+  const [openmodal, setOpenModal] = useState(true);
   const [currentitem, setCurrentItem] = useState({});
-  
-  const openModal = ( title, ingredients, url ) => {
+
+  const openModal = (title, ingredients, url, image) => {
     setOpenModal(true);
-    setCurrentItem({title, ingredients, url})
+    setCurrentItem({ title, ingredients, url, image })
   }
   const closeModal = () => {
     setOpenModal(false);
   }
-  
+
   const updateSearch = (e) => {
     setSearch(e.target.value)
   }
 
   const getSearch = (e) => {
     e.preventDefault()
-    setQuery(search) 
+    setQuery(search)
     setSearch('')
   }
 
+
   return (
-       <div className="App">
-          <div className="shadow">
-            <div className="home-container">
-              <Title />
-              {/* <Form search={search} updateSearch={updateSearch} getSearch={getSearch} /> */}
-              {status === 'loading' && <div> Loading data </div> }
-              {status === 'error' && <div> Error fetching data </div> }
-              
-              {status === 'success' && <Resultslist data={data.hits} testData={testData} openModal={openModal} />}
-              
-              {status === 'success' && data.length === 0 && <Notfound /> }
-              
-              {recipes && <div className="recipes">
-                    {recipes.map(recipe => (
-                        <Recipe key={uuid()} recipes={recipes} recipe={recipe} title={recipe.recipe.label} url={recipe.recipe.url} />
-                     ))} 
-                        </div> 
-              } 
-              { openmodal && <Modal openmodal={openmodal} setOpenModal={setOpenModal} closeModal={closeModal} currentitem={currentitem} /> }
-            </div> 
+    <div className="App">
+      <div className="shadow">
+        <div className="home-container">
+          <Title />
+          <Form search={search} updateSearch={updateSearch} getSearch={getSearch} />
+          {/* {recipes && console.log(recipes)}*/}
+          {/* {search && !recipes(<div> Loading data </div>)} */}
+
+          {recipes && <div className="list"> {recipes.map(recipe => (<Recipe key={uuid()} recipe={recipe} />))}
           </div>
+          }
+          {/* {recipes && <div className="recipes">
+            {recipes.map(recipe => (
+              <Recipe key={uuid()} recipes={recipes} recipe={recipe} title={recipe.recipe.label} url={recipe.recipe.url} />
+            ))}
+          </div>
+          } */}
+          <div className="footer">Powered by the edamam API</div>
         </div>
+      </div>
+    </div >
   );
 }
 
-export default App; 
+export default App;
